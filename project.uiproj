@@ -1,0 +1,6 @@
+{
+  "Name": "JobFinder",
+  "ProjectType": "Process",
+  "Description": "Kariyer.net adresinde gün içinde açılmış ilanlar içerisinde özgeçmişe en uygun ilanları kullanıcıya mail yoluyla bildirir.",
+  "MainFile": "Main.xaml"
+}
