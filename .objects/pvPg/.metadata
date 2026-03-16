@@ -1,0 +1,12 @@
+﻿{
+  "Name": "Chrome Yeni İş İlanları - Güncel Yeni İş Fırsatları",
+  "Type": "App",
+  "Id": "pvPguRigUUSIiOJdl4HazQ",
+  "Reference": "-B4ybalJ2EO1FQAInxGHZg/pvPguRigUUSIiOJdl4HazQ",
+  "Created": "2026-03-16T13:04:29.6184419Z",
+  "Updated": "2026-03-16T13:04:29.6184419Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.1.0.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=25.12.1.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

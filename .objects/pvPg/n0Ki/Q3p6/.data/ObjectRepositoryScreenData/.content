@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryScreenData ContentHash="MbW12SnHUUaECIyN4RmrSQ" Reference="-B4ybalJ2EO1FQAInxGHZg/Q3p6U8U540uRW2thMbG0zQ" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryScreenData.Data>
+    <TargetApp x:Key="TargetApp" Area="-8, -8, 1936, 1056" BrowserType="Chrome" ContentHash="0TcFl8DFHESgCkbgpRhkww" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABJlBMVEWDFrSCFLOSMr3u3/X9+/78+f3s2/OQL7ySM73x5Pb////u4PWRMLyBErOBE7ODFbSTM72jUceiUcefS8WJIbeZQMHkzO/7+P369vzy5vedR8SCE7OTNL7gxez9+v7AitmGHLaQLryNKLrZt+j+/f7ImN6IH7eCFbSXO8DPpOL//v/Qp+OLJbnx5ffTrOT8+v3YtuePLbv9/P7fw+yUNb7mz/CtZc6AELLaueiRL7zVsOaNKbrz6Pjbu+nPpuKKJLiaQcLTreXJmt+PLruPLLvauunCjdqGG7XfxOz79/y7f9aEGLXv4fWYPsHkze/48/u1dNKEF7SOKrrhx+327fn06/mMKLrjy+717fn27vreweuMJ7mDF7SRML2YPcGYPcCSMb2EGLRZeSeLAAABHElEQVQ4T2OAAEYmZhZWFjZ2RigfAzBycHJxcXHzDBsFjLxAwMcPlYABhAJGAUEhIUFhETQVcAV8omLiEhLiklLSUBkogCnglZEF0lxy8gpQCRiAKlBUUgbJq6iqqUMlYACigFlDUwukQFsHwzcQBbp6+iB5A0NM30IUqBiB5I1N+KCiSACiAAxMRbHIIynQNzOHiqEAJBMsLLGFN0SBFtgPVtZYVEAU2NiqgJTZ2ePyBbODI8gIFSeMcIIq4HZ2cQWp0HdzxxWbvCYeIBWeXt7osSkAUuADjE1fP5AK/4BAqAwUqAcFh4SGGIepM/BJhUeEhkZGRaM5IyY2Lj6OPQbIYnSJi4+PS0iEiCMAozQQglnq0oww5tAADAwAUBoh6nt53A8AAAAASUVORK5CYII=" Reference="-B4ybalJ2EO1FQAInxGHZg/Q3p6U8U540uRW2thMbG0zQ" Selector="&lt;html app='chrome.exe' title='Yeni İş İlanları - Güncel Yeni İş Fırsatları' /&gt;" Url="[&quot;https://www.kariyer.net/is-ilanlari/yeni-&quot;+PageNo.ToString]" Version="V2">
+      <TargetApp.Arguments>
+        <p:InArgument x:TypeArguments="x:String" />
+      </TargetApp.Arguments>
+      <TargetApp.WorkingDirectory>
+        <p:InArgument x:TypeArguments="x:String" />
+      </TargetApp.WorkingDirectory>
+      <imageRef attrName="InformativeScreenshot" originalValue="e4552cfff737c84ab8b36016883a8a8f.jpg" xmlns="">0pHaBNf8e1ke37d8rTONNGw</imageRef>
+    </TargetApp>
+    <scg:List x:TypeArguments="ObjectRepositoryVariableData" x:Key="Variables" Capacity="1">
+      <ObjectRepositoryVariableData Name="PageNo" />
+    </scg:List>
+  </ObjectRepositoryScreenData.Data>
+</ObjectRepositoryScreenData>
