@@ -1,0 +1,13 @@
+﻿{
+  "Name": "Chrome Yeni İş İlanları - Güncel Yeni İş Fırs(1)",
+  "Type": "Screen",
+  "Id": "SNGtqcdcU0WCyoi6gRSQNA",
+  "Reference": "-B4ybalJ2EO1FQAInxGHZg/SNGtqcdcU0WCyoi6gRSQNA",
+  "ParentRef": "-B4ybalJ2EO1FQAInxGHZg/n0Ki1LMHe0G_oFsyxYJ5UA",
+  "Created": "2026-03-17T10:19:56.5739767Z",
+  "Updated": "2026-03-17T10:19:56.5739767Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.1.0.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=25.12.1.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

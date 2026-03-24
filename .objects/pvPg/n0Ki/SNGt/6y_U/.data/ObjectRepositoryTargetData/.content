@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="yHslYUYy8EiIcbaxN42JlA" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="kariyer.net/is-ilani/turkcell-global-bilgi-veri-merkezi-operasyonlari-destek-uzmani-gebze-4398257" DesignTimeRectangle="408, 497, 726, 440" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl class='job-detail-qualifications' parentid='__layout' tag='DIV' /&gt;" Guid="b641cbc7-3923-4b26-9888-0814704717e4" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Turkcell Global Bilgi Veri Merkezi Operasyonları Destek Uzmanı-Gebze İş İlanı - 24.03.2026' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive">
+      <imageRef attrName="InformativeScreenshot" originalValue="84a9780cea9aa2f96ce6885006a15cf7.jpg" xmlns="">0b0dGHwNGAk-tUwmhUU9e5Q</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">GetText</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

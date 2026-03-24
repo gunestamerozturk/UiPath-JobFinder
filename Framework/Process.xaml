@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:uasc="clr-namespace:UiPath.Activities.System.Collections;assembly=UiPath.System.Activities" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uwahm="clr-namespace:UiPath.Web.Activities.Http.Models;assembly=UiPath.Web.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -9,7 +9,7 @@
   <sap:VirtualizedContainerService.HintSize>818.4,454.4</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="50">
+    <scg:List x:TypeArguments="x:String" Capacity="100">
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
@@ -35,9 +35,38 @@
       <x:String>System.Xml.Linq</x:String>
       <x:String>UiPath.Core</x:String>
       <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.Web.Activities.Http.Models</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>System.Net</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Web.Activities.Http</x:String>
+      <x:String>UiPath.Sdk.Activities</x:String>
+      <x:String>UiPath.Sdk.Activities.DependencyInjection.Contracts</x:String>
+      <x:String>UiPath.Sdk.Activities.DependencyInjection</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.Activities.System.Collections</x:String>
       <x:String>GlobalVariablesNamespace</x:String>
       <x:String>GlobalConstantsNamespace</x:String>
-      <x:String>System.Linq.Expressions</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.Web.Activities.JSON.Models</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -88,17 +117,213 @@
       <AssemblyReference>NPOI.Core</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.IntelligentOCR.StudioWeb.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="781,620.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1415,2698" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="str_JobDetail" />
+      <Variable x:TypeArguments="uwahm:HttpResponseSummary" Name="obj_MatchResult" />
+      <Variable x:TypeArguments="x:String" Name="str_MatchResult" />
+      <Variable x:TypeArguments="x:String" Name="str_Score" />
+      <Variable x:TypeArguments="x:String" Name="str_Description" />
+      <Variable x:TypeArguments="x:String" Name="str_ilanLink" />
+      <Variable x:TypeArguments="x:String" Name="str_ilanBaslik" />
+      <Variable x:TypeArguments="x:String" Name="strAiMatchResult" />
+      <Variable x:TypeArguments="njl:JObject" Name="str_AiMatchResult" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
-    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="450,89" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="450,166" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;İşleniyor: &quot; + in_TransactionItem.SpecificContent(&quot;ilanBaslik&quot;).ToString + &quot; | Link: &quot; + in_TransactionItem.SpecificContent(&quot;ilanLink&quot;).ToString]" />
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="478,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="478,89" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;İşleniyor: &quot; + in_TransactionItem.SpecificContent(&quot;ilanBaslik&quot;).ToString + &quot; | Link: &quot; + in_TransactionItem.SpecificContent(&quot;ilanLink&quot;).ToString]" />
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Chrome Yeni İş İlanları - Güncel Yeni İş Fırs(1)" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="478,397" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="4cc274bc-4837-4e72-97c1-03d3f649602d" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Yap" sap:VirtualizedContainerService.HintSize="450,194" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NGetText DisplayName="Get Text '2001 yılından bu yana b…'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,134" sap2010:WorkflowViewState.IdRef="NGetText_1" ScopeIdentifier="4cc274bc-4837-4e72-97c1-03d3f649602d" TextString="[str_JobDetail]" Version="V5">
+              <uix:NGetText.Target>
+                <uix:TargetAnchorable BrowserURL="kariyer.net/is-ilani/turkcell-global-bilgi-veri-merkezi-operasyonlari-destek-uzmani-gebze-4398257" ContentHash="yHslYUYy8EiIcbaxN42JlA" DesignTimeRectangle="408, 497, 726, 440" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl class='job-detail-qualifications' parentid='__layout' tag='DIV' /&gt;" Guid="b641cbc7-3923-4b26-9888-0814704717e4" InformativeScreenshot="84a9780cea9aa2f96ce6885006a15cf7.jpg" Reference="-B4ybalJ2EO1FQAInxGHZg/6y_UnAnzlkyDT5lPAMtPfA" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Turkcell Global Bilgi Veri Merkezi Operasyonları Destek Uzmanı-Gebze İş İlanı - 24.03.2026' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
+              </uix:NGetText.Target>
+            </uix:NGetText>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1936, 1056" BrowserType="Chrome" ContentHash="kgWlBU7FjEurnVh4b0emRQ" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABJlBMVEWDFrSCFLOSMr3u3/X9+/78+f3s2/OQL7ySM73x5Pb////u4PWRMLyBErOBE7ODFbSTM72jUceiUcefS8WJIbeZQMHkzO/7+P369vzy5vedR8SCE7OTNL7gxez9+v7AitmGHLaQLryNKLrZt+j+/f7ImN6IH7eCFbSXO8DPpOL//v/Qp+OLJbnx5ffTrOT8+v3YtuePLbv9/P7fw+yUNb7mz/CtZc6AELLaueiRL7zVsOaNKbrz6Pjbu+nPpuKKJLiaQcLTreXJmt+PLruPLLvauunCjdqGG7XfxOz79/y7f9aEGLXv4fWYPsHkze/48/u1dNKEF7SOKrrhx+327fn06/mMKLrjy+717fn27vreweuMJ7mDF7SRML2YPcGYPcCSMb2EGLRZeSeLAAABHElEQVQ4T2OAAEYmZhZWFjZ2RigfAzBycHJxcXHzDBsFjLxAwMcPlYABhAJGAUEhIUFhETQVcAV8omLiEhLiklLSUBkogCnglZEF0lxy8gpQCRiAKlBUUgbJq6iqqUMlYACigFlDUwukQFsHwzcQBbp6+iB5A0NM30IUqBiB5I1N+KCiSACiAAxMRbHIIynQNzOHiqEAJBMsLLGFN0SBFtgPVtZYVEAU2NiqgJTZ2ePyBbODI8gIFSeMcIIq4HZ2cQWp0HdzxxWbvCYeIBWeXt7osSkAUuADjE1fP5AK/4BAqAwUqAcFh4SGGIepM/BJhUeEhkZGRaM5IyY2Lj6OPQbIYnSJi4+PS0iEiCMAozQQglnq0oww5tAADAwAUBoh6nt53A8AAAAASUVORK5CYII=" InformativeScreenshot="f9c464f602c492fee7dd563d2c9ccaa6.jpg" Reference="-B4ybalJ2EO1FQAInxGHZg/SNGtqcdcU0WCyoi6gRSQNA" Selector="&lt;html app='chrome.exe' title='Lidya Bilişim Teknoloji Sist. Tic.ve San.A.Ş. Muhasebe Elemanı İş İlanı - 17.03.2026' /&gt;" Url="[in_TransactionItem.SpecificContent(&quot;ilanLink&quot;).ToString]" Version="V2">
+          <uix:TargetApp.Arguments>
+            <InArgument x:TypeArguments="x:String" />
+          </uix:TargetApp.Arguments>
+          <uix:TargetApp.WorkingDirectory>
+            <InArgument x:TypeArguments="x:String" />
+          </uix:TargetApp.WorkingDirectory>
+        </uix:TargetApp>
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
+    <isactr:ConnectorHttpActivity Configuration="H4sIAAAAAAAACu1WS2/bMAz+K4OOg5O0w07GUCAPtwmWLV6bdoehB9VmEjW2pOqR1A3y30dJdrYuwZYBxS5rDrFJk/xImh/lDTlnUOS6L7ihjIMi8YaMuLQm6En8bUM+0xJITEowC5GTiAyYlgWtavWnRj2tpJO1UYzPUb6EB8sU5CQ2ykIUkMYio4YJjoY9kVdkG+3iW1XsBU94LgXj5gXCL4DmoPSPSOLuHjIX+VyokhrU5CxzzlRVHwJMxFCY2xK4qTVnZx5aS8E1HAv9YEFVLwH8J6A7J++3agCazdF+EwJ0PVh4t+G+dhiyHFx5toDw9BJm3uPXCWj0N7Sw3pRcJFNyu711uTwLebUQ66NCjvRXoZazQqyTR6lAa19h6O8+XDq5mqJTeu3+B8k4mSZO7E77Q58GJvL/1HrsQKLhxJqD3P6H5AgpvE7t69T+/aRkwpP20FEAGod0RgsNxwd2W6L2TRWsGKxTqhDJOCrgtqyPttgzPiLXeEAhVYyROu50qGRtIYFT1s5E2VmdosWwphH6di36Kva0oyBQBeqNXrb06q3/oX03y0A6clEpCxby69xrdIiIO5KRWq262D0LzP2LP1fizRbvR1wbyjN4XsENXgP+afukfRLCcmS2UB8BXYllkppFKxRSX3xihq2YqWrwC8BPA5bhg4nfC83WwFY0vcfiUdp1LBVeN5Ggmg70FVADLu8+zRaAL0QsrWz23Gan7ymx1qBGBspanypW4t7BjN3SwjWW0mxJ5/Bzde/e+/J+k9+BXCIypnxuMRTqjHKjBY+mV4hs6ZG23wEaUEYpIAkAAA==" ConnectionId="deddc78c-e466-4a27-a823-1c2c2874a1b4" DisplayName="OpenAI HTTP Request" sap:VirtualizedContainerService.HintSize="478,550" sap2010:WorkflowViewState.IdRef="ConnectorHttpActivity_1" UiPathActivityTypeId="04e30305-d148-331a-bf56-23605ab3ecbe">
+      <isactr:ConnectorHttpActivity.FieldObjects>
+        <isactr:FieldObject Name="method" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">POST</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="url" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">https://api.openai.com/v1/responses</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="headers" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="query" Type="FieldArgument" />
+        <isactr:FieldObject Name="body" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">["{
+  ""model"": ""gpt-5.4"",
+  ""input"": " + Newtonsoft.Json.JsonConvert.ToString("Aşağıdaki ADAY ÖZETİ ile İŞ TANIMI metnini titizlikle karşılaştır: ### ÖZGEÇMİŞ: " + in_Config("CV_Summary").ToString + " ### İLAN: " + str_JobDetail + " ### GÖREV: 1) Adayın bu işe uygunluğuna 0 ile 100 arasında bir puan ver. 2) Bu puanın nedenini açıklayan, adayın güçlü/zayıf yanına değinen tek bir cümlelik özet yaz. ### YANIT FORMATI: Sadece 'PUAN|AÇIKLAMA' şeklinde yanıt ver. Başka hiçbir metin ekleme. Örnek: 85|Adayın UiPath tecrübesi ilanla çok uyumlu ancak SQL bilgisi geliştirilmeli.") + "
+}"]</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_headers" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_body" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:String">[strAiMatchResult]</OutArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_code" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:Int32" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+      </isactr:ConnectorHttpActivity.FieldObjects>
+    </isactr:ConnectorHttpActivity>
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" Settings="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="478,174" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[str_AiMatchResult]" JsonString="[strAiMatchResult]" />
+    <Assign sap:VirtualizedContainerService.HintSize="478,175" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[str_MatchResult]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[str_AiMatchResult("output")(0)("content")(0)("text").ToString.Trim]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="478,175" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Uygunluk Skoru : &quot;+str_MatchResult]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478,242" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[str_Score]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[str_MatchResult.Split("|"c)(0).Trim]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[str_Description]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[str_MatchResult.Split("|"c)(1).Trim]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[str_ilanLink]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("ilanLink").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[str_ilanBaslik]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("ilanBaslik").ToString]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <If Condition="[CInt(str_Score) &gt;= 75]" sap:VirtualizedContainerService.HintSize="478,446" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,226" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <uasc:AppendItemToCollection x:TypeArguments="x:String" Collection="[list_FinalResults]" DisplayName="Append Items to Collection" sap:VirtualizedContainerService.HintSize="416,166" sap2010:WorkflowViewState.IdRef="AppendItemToCollection`1_2">
+            <uasc:AppendItemToCollection.Items>
+              <scg:List x:TypeArguments="InArgument(x:String)" Capacity="4">
+                <InArgument x:TypeArguments="x:String">[str_Score +"% | "+ str_ilanBaslik + Environment.NewLine + "Not :" + str_Description + Environment.NewLine + "Link : "+ str_ilanLink]</InArgument>
+              </scg:List>
+            </uasc:AppendItemToCollection.Items>
+          </uasc:AppendItemToCollection>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,90" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>

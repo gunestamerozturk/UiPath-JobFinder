@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uisape="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.PDF.ExtractPDFText;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uwah="clr-namespace:UiPath.Web.Activities.Http;assembly=UiPath.Web.Activities" xmlns:uwahm="clr-namespace:UiPath.Web.Activities.Http.Models;assembly=UiPath.Web.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Initialize_Applications" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:isactr="http://schemas.uipath.com/workflow/integration-service-activities/isactr" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:sd2="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uisape="clr-namespace:UiPath.IntelligentOCR.StudioWeb.Activities.PDF.ExtractPDFText;assembly=UiPath.IntelligentOCR.StudioWeb.Activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:uwahm="clr-namespace:UiPath.Web.Activities.Http.Models;assembly=UiPath.Web.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
@@ -9,8 +9,6 @@
   <sap2010:WorkflowViewState.IdRef>Initialization_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
-      <x:String>GlobalConstantsNamespace</x:String>
-      <x:String>GlobalVariablesNamespace</x:String>
       <x:String>Microsoft.VisualBasic</x:String>
       <x:String>Microsoft.VisualBasic.Activities</x:String>
       <x:String>System</x:String>
@@ -69,6 +67,12 @@
       <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
       <x:String>UiPath.DataTableUtilities</x:String>
       <x:String>UiPath.Core.Activities.Orchestrator</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -153,26 +157,27 @@
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Parallel</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="747,5051" sap2010:WorkflowViewState.IdRef="Sequence_9">
+  <Sequence sap2010:Annotation.AnnotationText="Open applications used in the process and do necessary initialization procedures (e.g., login)." DisplayName="Initialize All Applications" sap:VirtualizedContainerService.HintSize="1415,5633" sap2010:WorkflowViewState.IdRef="Sequence_9">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Default="[1]" Name="PageNo" />
       <Variable x:TypeArguments="x:String" Name="strCVContent" />
       <Variable x:TypeArguments="uwahm:HttpResponseSummary" Name="obj_CVSummary" />
       <Variable x:TypeArguments="x:String" Name="strCVSummary" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_AllJobs" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_TempJobs" />
+      <Variable x:TypeArguments="sd2:DataTable" Name="dt_AllJobs" />
+      <Variable x:TypeArguments="sd2:DataTable" Name="dt_TempJobs" />
       <Variable x:TypeArguments="x:String" Name="str_JobTitles" />
-      <Variable x:TypeArguments="x:Int32" Name="int_JobTitleNo">
-        <Variable.Default>
-          <Literal x:TypeArguments="x:Int32" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="x:Int32" Default="0" Name="int_JobTitleNo" />
       <Variable x:TypeArguments="uwahm:HttpResponseSummary" Name="obj_AiJobTitles" />
       <Variable x:TypeArguments="x:String" Name="str_AiJobTitles" />
       <Variable x:TypeArguments="s:String[]" Name="arr_TargetIndıces" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_FilteredJobs" />
+      <Variable x:TypeArguments="sd2:DataTable" Name="dt_FilteredJobs" />
+      <Variable x:TypeArguments="x:String" Name="strAiCVSummary" />
+      <Variable x:TypeArguments="njl:JObject" Name="objAiCVSummary" />
+      <Variable x:TypeArguments="njl:JObject" Name="objAiJobTitles" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -183,20 +188,56 @@
     <ui:LogMessage DisplayName="Log message (Initialize applications)" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Opening applications...&quot;]" />
     <uisape:ExtractPDFText FilePassword="{x:Null}" OcrEngine="{x:Null}" ApplyOcr="False" DisplayName="Extract PDF Text" sap:VirtualizedContainerService.HintSize="488,123" sap2010:WorkflowViewState.IdRef="ExtractPDFText_1" PdfFile="[LocalResource.FromPath(Path.GetFullPath(in_Config(&quot;CV_Path&quot;).ToString))]" Text="[strCVContent]" />
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Özgeçmiş okundu ve özetlenmesi için iletiliyor.&quot;]" />
-    <uwah:NetHttpRequest BasicAuthPassword="{x:Null}" BasicAuthSecurePassword="{x:Null}" BasicAuthUsername="{x:Null}" BinaryPayload="{x:Null}" ClientCertPassword="{x:Null}" ClientCertPath="{x:Null}" ClientCertSecurePassword="{x:Null}" Cookies="{x:Null}" CustomNegotiatedAuthCredentials="{x:Null}" FilePath="{x:Null}" FormData="{x:Null}" LocalFiles="{x:Null}" OAuthToken="{x:Null}" OutputFileName="{x:Null}" OutputFileTargetFolder="{x:Null}" Parameters="{x:Null}" PathResource="{x:Null}" ProxyConfiguration="{x:Null}" ResourceFiles="{x:Null}" AuthenticationType="None" ContinueOnError="True" DisableSslVerification="False" DisplayName="HTTP Request" EnableCookies="True" FileOverwrite="AutoRename" FollowRedirects="True" FormDataParts="[New List (Of FormDataPart) From _&#xA;{&#xA;&#x9;New FileFormDataPart(),&#xA;&#x9;New BinaryFormDataPart(),&#xA;&#x9;New TextFormDataPart()&#xA;}]" Headers="[new System.Collections.Generic.Dictionary(Of System.String, System.String) From { { &quot;Content-Type&quot;, &quot;application/json&quot; },{ &quot;x-goog-api-key&quot;, in_Config(&quot;GoogleApiKey&quot;).ToString } }]" sap:VirtualizedContainerService.HintSize="488,433" sap2010:WorkflowViewState.IdRef="NetHttpRequest_1" InitialDelay="1000" MaxRedirects="3" MaxRetryAfterDelay="300000" Method="POST" Multiplier="2" PreferRetryAfterValue="True" RequestBodyType="Text" RequestUrl="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" Result="[obj_CVSummary]" RetryCount="3" RetryPolicyType="Basic" RetryStatusCodes="[New List (Of System.Net.HttpStatusCode) From _&#xA;{&#xA;&#x9;System.Net.HttpStatusCode.RequestTimeout,&#xA;&#x9;System.Net.HttpStatusCode.TooManyRequests,&#xA;&#x9;System.Net.HttpStatusCode.InternalServerError,&#xA;&#x9;System.Net.HttpStatusCode.BadGateway,&#xA;&#x9;System.Net.HttpStatusCode.ServiceUnavailable,&#xA;&#x9;System.Net.HttpStatusCode.GatewayTimeout&#xA;}]" SaveRawRequestResponse="False" SaveResponseAsFile="False" TextPayload="[&quot;{ &quot;&quot;contents&quot;&quot;: [ { &quot;&quot;parts&quot;&quot;: [ { &quot;&quot;text&quot;&quot;: &quot;&quot;ROL: Profesyonel bir İK Uzmanısın. GÖREV: Aşağıdaki özgeçmiş metnini analiz et ve adayın yetkinliklerine odaklanarak en fazla 1000 karakterlik profesyonel bir özet çıkar. Herhangi bir yorum yapmadan yalnızca yanıt gönder. ÖZGEÇMİŞ METNİ: &quot; + strCVContent.Replace(&quot;&quot;&quot;&quot;, &quot;'&quot;).Replace(Environment.NewLine, &quot; &quot;) + &quot;&quot;&quot; } ] } ] }&quot;]" TextPayloadContentType="application/json" TextPayloadEncoding="UTF-8" TlsProtocol="Automatic" UseJitter="True" UseOsNegotiatedAuthCredentials="True">
-      <uwah:NetHttpRequest.TimeoutInMiliseconds>
-        <InArgument x:TypeArguments="s:Nullable(x:Int32)">
-          <Literal x:TypeArguments="s:Nullable(x:Int32)" Value="300000" />
-        </InArgument>
-      </uwah:NetHttpRequest.TimeoutInMiliseconds>
-    </uwah:NetHttpRequest>
-    <Assign DisplayName="Assign 1" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <isactr:ConnectorHttpActivity Configuration="H4sIAAAAAAAACu1WS2/bMAz+K4OOg5O0w07GUCAPtwmWLV6bdoehB9VmEjW2pOqR1A3y30dJdrYuwZYBxS5rDrFJk/xImh/lDTlnUOS6L7ihjIMi8YaMuLQm6En8bUM+0xJITEowC5GTiAyYlgWtavWnRj2tpJO1UYzPUb6EB8sU5CQ2ykIUkMYio4YJjoY9kVdkG+3iW1XsBU94LgXj5gXCL4DmoPSPSOLuHjIX+VyokhrU5CxzzlRVHwJMxFCY2xK4qTVnZx5aS8E1HAv9YEFVLwH8J6A7J++3agCazdF+EwJ0PVh4t+G+dhiyHFx5toDw9BJm3uPXCWj0N7Sw3pRcJFNyu711uTwLebUQ66NCjvRXoZazQqyTR6lAa19h6O8+XDq5mqJTeu3+B8k4mSZO7E77Q58GJvL/1HrsQKLhxJqD3P6H5AgpvE7t69T+/aRkwpP20FEAGod0RgsNxwd2W6L2TRWsGKxTqhDJOCrgtqyPttgzPiLXeEAhVYyROu50qGRtIYFT1s5E2VmdosWwphH6di36Kva0oyBQBeqNXrb06q3/oX03y0A6clEpCxby69xrdIiIO5KRWq262D0LzP2LP1fizRbvR1wbyjN4XsENXgP+afukfRLCcmS2UB8BXYllkppFKxRSX3xihq2YqWrwC8BPA5bhg4nfC83WwFY0vcfiUdp1LBVeN5Ggmg70FVADLu8+zRaAL0QsrWz23Gan7ymx1qBGBspanypW4t7BjN3SwjWW0mxJ5/Bzde/e+/J+k9+BXCIypnxuMRTqjHKjBY+mV4hs6ZG23wEaUEYpIAkAAA==" ConnectionId="deddc78c-e466-4a27-a823-1c2c2874a1b4" DisplayName="OpenAI HTTP Request" sap:VirtualizedContainerService.HintSize="488,550" sap2010:WorkflowViewState.IdRef="ConnectorHttpActivity_1" UiPathActivityTypeId="04e30305-d148-331a-bf56-23605ab3ecbe">
+      <isactr:ConnectorHttpActivity.FieldObjects>
+        <isactr:FieldObject Name="method" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">POST</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="url" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">https://api.openai.com/v1/responses</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="headers" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="query" Type="FieldArgument" />
+        <isactr:FieldObject Name="body" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">["{
+  ""model"": ""gpt-5.4"",
+  ""input"": " + Newtonsoft.Json.JsonConvert.ToString("Sen bir İK profesyonelisin. Aşağıdaki CV metnini adayın yetkinliklerini ve kullandığı teknolojileri göz önünde bulundurarak profesyonel bir İK özeti haline getir. Başka bir cevap verme ve yorumda bulunma, yalnızca özeti yaz.  CV METNİ: " +strCVContent.Replace("""", "'").Replace(Environment.NewLine, " ")) + "
+}"]</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_headers" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_body" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:String">[strAiCVSummary]</OutArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_code" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:Int32" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+      </isactr:ConnectorHttpActivity.FieldObjects>
+    </isactr:ConnectorHttpActivity>
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" Settings="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="488,174" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[objAiCVSummary]" JsonString="[strAiCVSummary]" />
+    <Assign sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_11">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[strCVSummary]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve">[Newtonsoft.Json.Linq.JObject.Parse(obj_CVSummary.TextContent).
-    SelectToken("candidates[0].content.parts[0].text").ToString()]</InArgument>
+        <InArgument x:TypeArguments="x:String">[objAiCVSummary("output")(0)("content")(0)("text").ToString.Trim]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;Özgeçmiş Özeti : &quot;+strCVSummary]" />
@@ -208,7 +249,7 @@
         <InArgument x:TypeArguments="x:Object">[strCVSummary]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:BuildDataTable DataTable="[dt_AllJobs]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="488,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ilanBaslik&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ilanLink&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:BuildDataTable DataTable="[dt_AllJobs]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="488,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ilanBaslik&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;ilanLink&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
     <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Chrome Yeni İş İlanları - Güncel Yeni İş Fırs" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="488,1044" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="d70989b7-3f48-47df-b4c5-15fc970147f8" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -229,7 +270,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <uix:NExtractDataGeneric x:TypeArguments="sd:DataTable" ContinueOnError="True" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='ilanBaslik'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column1' Name='ilanLink'&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xD;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xD;&#xA;&#x9;&#x9;&lt;IsExtra&gt;true&lt;/IsExtra&gt;&#xD;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xD;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xD;&#xA;&#x9;&lt;/Column&gt;&#xD;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='fulltext' name2='Column1' attr2='href'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" ExtractedData="[dt_TempJobs]" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,143" sap2010:WorkflowViewState.IdRef="NExtractDataGeneric`1_2" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="d70989b7-3f48-47df-b4c5-15fc970147f8" Version="V5">
+                  <uix:NExtractDataGeneric x:TypeArguments="sd2:DataTable" ContinueOnError="True" DisplayName="Extract Table Data" ExtractDataSettings="&lt;Table xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' Type='Structured' AddCvHeader='true' IsScrollEnabled='false'&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column0' Name='ilanBaslik'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;false&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&#x9;&lt;Column xsi:type='DataColumn' ReferenceName='Column1' Name='ilanLink'&gt;&#xA;&#x9;&#x9;&lt;IsValidName&gt;true&lt;/IsValidName&gt;&#xA;&#x9;&#x9;&lt;ValidationErrorMessage /&gt;&#xA;&#x9;&#x9;&lt;IsExtra&gt;true&lt;/IsExtra&gt;&#xA;&#x9;&#x9;&lt;CanExtractSimilar&gt;true&lt;/CanExtractSimilar&gt;&#xA;&#x9;&#x9;&lt;Format xsi:type='TextColumnFormat' /&gt;&#xA;&#x9;&lt;/Column&gt;&#xA;&lt;/Table&gt;" ExtractMetadata="&lt;extract&gt;&lt;column exact='1' name='Column0' attr='fulltext' name2='Column1' attr2='href'&gt;&lt;webctrl tag='div' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='a' idx='1' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;webctrl tag='div' idx='2' /&gt;&lt;webctrl tag='div' idx='1' /&gt;&lt;/column&gt;&lt;/extract&gt;" ExtractedData="[dt_TempJobs]" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="416,143" sap2010:WorkflowViewState.IdRef="NExtractDataGeneric`1_2" LimitExtractionTo="None" MaximumResults="0" ScopeIdentifier="d70989b7-3f48-47df-b4c5-15fc970147f8" Version="V5">
                     <uix:NExtractDataGeneric.Target>
                       <uix:TargetAnchorable BrowserURL="https://www.kariyer.net/is-ilanlari/yeni-1" DesignTimeRectangle="626, -38, 629, 8490" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl class='list-items-wrapper' parentid='__layout' tag='DIV' /&gt;" Guid="85daf605-7848-48ff-9c25-787ffe2250dc" InformativeScreenshot="7ba48d77f4a348250088de0b9c8bc307.jpg" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Yeni İş İlanları - Güncel Yeni İş Fırsatları' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="Interactive" />
                     </uix:NExtractDataGeneric.Target>
@@ -247,12 +288,19 @@
                 </Sequence>
               </ui:InterruptibleWhile.Body>
               <ui:InterruptibleWhile.Condition>
-                <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="PageNo&lt;3" sap2010:WorkflowViewState.IdRef="VisualBasicValue`1_1" />
+                <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="PageNo&lt;=10" />
               </ui:InterruptibleWhile.Condition>
             </ui:InterruptibleWhile>
           </Sequence>
         </ActivityAction>
       </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
       <uix:NApplicationCard.TargetApp>
         <uix:TargetApp Area="-8, -8, 1936, 1056" BrowserType="Chrome" ContentHash="MbW12SnHUUaECIyN4RmrSQ" IconBase64="iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABJlBMVEWDFrSCFLOSMr3u3/X9+/78+f3s2/OQL7ySM73x5Pb////u4PWRMLyBErOBE7ODFbSTM72jUceiUcefS8WJIbeZQMHkzO/7+P369vzy5vedR8SCE7OTNL7gxez9+v7AitmGHLaQLryNKLrZt+j+/f7ImN6IH7eCFbSXO8DPpOL//v/Qp+OLJbnx5ffTrOT8+v3YtuePLbv9/P7fw+yUNb7mz/CtZc6AELLaueiRL7zVsOaNKbrz6Pjbu+nPpuKKJLiaQcLTreXJmt+PLruPLLvauunCjdqGG7XfxOz79/y7f9aEGLXv4fWYPsHkze/48/u1dNKEF7SOKrrhx+327fn06/mMKLrjy+717fn27vreweuMJ7mDF7SRML2YPcGYPcCSMb2EGLRZeSeLAAABHElEQVQ4T2OAAEYmZhZWFjZ2RigfAzBycHJxcXHzDBsFjLxAwMcPlYABhAJGAUEhIUFhETQVcAV8omLiEhLiklLSUBkogCnglZEF0lxy8gpQCRiAKlBUUgbJq6iqqUMlYACigFlDUwukQFsHwzcQBbp6+iB5A0NM30IUqBiB5I1N+KCiSACiAAxMRbHIIynQNzOHiqEAJBMsLLGFN0SBFtgPVtZYVEAU2NiqgJTZ2ePyBbODI8gIFSeMcIIq4HZ2cQWp0HdzxxWbvCYeIBWeXt7osSkAUuADjE1fP5AK/4BAqAwUqAcFh4SGGIepM/BJhUeEhkZGRaM5IyY2Lj6OPQbIYnSJi4+PS0iEiCMAozQQglnq0oww5tAADAwAUBoh6nt53A8AAAAASUVORK5CYII=" InformativeScreenshot="e4552cfff737c84ab8b36016883a8a8f.jpg" Reference="-B4ybalJ2EO1FQAInxGHZg/Q3p6U8U540uRW2thMbG0zQ" Selector="&lt;html app='chrome.exe' title='Yeni İş İlanları - Güncel Yeni İş Fırsatları' /&gt;" Url="[&quot;https://www.kariyer.net/is-ilanlari/yeni-&quot;+PageNo.ToString]" Version="V2">
           <uix:TargetApp.Arguments>
@@ -266,9 +314,9 @@
     </uix:NApplicationCard>
     <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_AllJobs]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="488,583" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
       <ui:ForEachRow.Body>
-        <ActivityAction x:TypeArguments="sd:DataRow">
+        <ActivityAction x:TypeArguments="sd2:DataRow">
           <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+            <DelegateInArgument x:TypeArguments="sd2:DataRow" Name="CurrentRow" />
           </ActivityAction.Argument>
           <Sequence DisplayName="Gövde" sap:VirtualizedContainerService.HintSize="450,401" sap2010:WorkflowViewState.IdRef="Sequence_15">
             <sap:WorkflowViewStateService.ViewState>
@@ -297,32 +345,68 @@
       </ui:ForEachRow.Body>
     </ui:ForEachRow>
     <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;ilan başlıkları değişkene aktarıldı ve filtreleme için yapay zekaya iletildi.&quot;+ vbLf + str_JobTitles]" />
-    <uwah:NetHttpRequest BasicAuthPassword="{x:Null}" BasicAuthSecurePassword="{x:Null}" BasicAuthUsername="{x:Null}" BinaryPayload="{x:Null}" ClientCertPassword="{x:Null}" ClientCertPath="{x:Null}" ClientCertSecurePassword="{x:Null}" Cookies="{x:Null}" CustomNegotiatedAuthCredentials="{x:Null}" FilePath="{x:Null}" FormData="{x:Null}" LocalFiles="{x:Null}" OAuthToken="{x:Null}" OutputFileName="{x:Null}" OutputFileTargetFolder="{x:Null}" Parameters="{x:Null}" PathResource="{x:Null}" ProxyConfiguration="{x:Null}" ResourceFiles="{x:Null}" AuthenticationType="None" ContinueOnError="True" DisableSslVerification="False" DisplayName="HTTP Request" EnableCookies="True" FileOverwrite="AutoRename" FollowRedirects="True" FormDataParts="[New List (Of FormDataPart) From _&#xD;&#xA;{&#xD;&#xA;&#x9;New FileFormDataPart(),&#xD;&#xA;&#x9;New BinaryFormDataPart(),&#xD;&#xA;&#x9;New TextFormDataPart()&#xD;&#xA;}]" Headers="[new System.Collections.Generic.Dictionary(Of System.String, System.String) From { { &quot;Content-Type&quot;, &quot;application/json&quot; },{ &quot;x-goog-api-key&quot;, in_Config(&quot;GoogleApiKey&quot;).ToString } }]" sap:VirtualizedContainerService.HintSize="488,433" sap2010:WorkflowViewState.IdRef="NetHttpRequest_2" InitialDelay="500" MaxRedirects="3" MaxRetryAfterDelay="300000" Method="POST" Multiplier="2" PreferRetryAfterValue="True" RequestBodyType="Text" RequestUrl="https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" Result="[obj_AiJobTitles]" RetryCount="3" RetryPolicyType="Basic" RetryStatusCodes="[New List (Of System.Net.HttpStatusCode) From _&#xD;&#xA;{&#xD;&#xA;&#x9;System.Net.HttpStatusCode.RequestTimeout,&#xD;&#xA;&#x9;System.Net.HttpStatusCode.TooManyRequests,&#xD;&#xA;&#x9;System.Net.HttpStatusCode.InternalServerError,&#xD;&#xA;&#x9;System.Net.HttpStatusCode.BadGateway,&#xD;&#xA;&#x9;System.Net.HttpStatusCode.ServiceUnavailable,&#xD;&#xA;&#x9;System.Net.HttpStatusCode.GatewayTimeout&#xD;&#xA;}]" SaveRawRequestResponse="False" SaveResponseAsFile="False" TextPayload="[&quot;{ &quot;&quot;contents&quot;&quot;: [ { &quot;&quot;parts&quot;&quot;: [ { &quot;&quot;text&quot;&quot;: &quot;&quot;### ROL: Profesyonel bir İK Uzmanısın. ### ADAY ÖZETİ: &quot; + strCVSummary.Replace(&quot;&quot;&quot;&quot;, &quot;'&quot;).Replace(Environment.NewLine, &quot; &quot;) + &quot; ### İLAN LİSTESİ: &quot; + str_JobTitles.Replace(&quot;&quot;&quot;&quot;, &quot;'&quot;) + &quot; ### TALİMAT: Yukarıdaki aday özeti ile ilan listesindeki ilanları karşılaştır. 0-100 arasında bir uygunluk skoru üret. Uygunluk skoru 80 ve üzeri olan ilanların SADECE NUMARALARINI aralarına virgül koyarak yaz (Örn: 1, 5, 12). Başka hiçbir açıklama yapma.&quot;&quot; } ] } ] }&quot;]" TextPayloadContentType="application/json" TextPayloadEncoding="UTF-8" TlsProtocol="Automatic" UseJitter="True" UseOsNegotiatedAuthCredentials="True">
-      <uwah:NetHttpRequest.TimeoutInMiliseconds>
-        <InArgument x:TypeArguments="s:Nullable(x:Int32)">
-          <Literal x:TypeArguments="s:Nullable(x:Int32)" Value="300000" />
-        </InArgument>
-      </uwah:NetHttpRequest.TimeoutInMiliseconds>
-    </uwah:NetHttpRequest>
-    <Assign DisplayName="Assign 6" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_8">
+    <isactr:ConnectorHttpActivity Configuration="H4sIAAAAAAAACu1WS2/bMAz+K4OOg5O0w07GUCAPtwmWLV6bdoehB9VmEjW2pOqR1A3y30dJdrYuwZYBxS5rDrFJk/xImh/lDTlnUOS6L7ihjIMi8YaMuLQm6En8bUM+0xJITEowC5GTiAyYlgWtavWnRj2tpJO1UYzPUb6EB8sU5CQ2ykIUkMYio4YJjoY9kVdkG+3iW1XsBU94LgXj5gXCL4DmoPSPSOLuHjIX+VyokhrU5CxzzlRVHwJMxFCY2xK4qTVnZx5aS8E1HAv9YEFVLwH8J6A7J++3agCazdF+EwJ0PVh4t+G+dhiyHFx5toDw9BJm3uPXCWj0N7Sw3pRcJFNyu711uTwLebUQ66NCjvRXoZazQqyTR6lAa19h6O8+XDq5mqJTeu3+B8k4mSZO7E77Q58GJvL/1HrsQKLhxJqD3P6H5AgpvE7t69T+/aRkwpP20FEAGod0RgsNxwd2W6L2TRWsGKxTqhDJOCrgtqyPttgzPiLXeEAhVYyROu50qGRtIYFT1s5E2VmdosWwphH6di36Kva0oyBQBeqNXrb06q3/oX03y0A6clEpCxby69xrdIiIO5KRWq262D0LzP2LP1fizRbvR1wbyjN4XsENXgP+afukfRLCcmS2UB8BXYllkppFKxRSX3xihq2YqWrwC8BPA5bhg4nfC83WwFY0vcfiUdp1LBVeN5Ggmg70FVADLu8+zRaAL0QsrWz23Gan7ymx1qBGBspanypW4t7BjN3SwjWW0mxJ5/Bzde/e+/J+k9+BXCIypnxuMRTqjHKjBY+mV4hs6ZG23wEaUEYpIAkAAA==" ConnectionId="deddc78c-e466-4a27-a823-1c2c2874a1b4" DisplayName="OpenAI HTTP Request" sap:VirtualizedContainerService.HintSize="488,550" sap2010:WorkflowViewState.IdRef="ConnectorHttpActivity_2" UiPathActivityTypeId="04e30305-d148-331a-bf56-23605ab3ecbe">
+      <isactr:ConnectorHttpActivity.FieldObjects>
+        <isactr:FieldObject Name="method" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">POST</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="url" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String">https://api.openai.com/v1/responses</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="headers" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="query" Type="FieldArgument" />
+        <isactr:FieldObject Name="body" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <InArgument x:TypeArguments="x:String" xml:space="preserve">["{
+  ""model"": ""gpt-5.4"",
+  ""input"": " +Newtonsoft.Json.JsonConvert.ToString("### ROL: Profesyonel bir İK Uzmanısın. ### ADAY ÖZETİ: " + strCVSummary + " ### İLAN LİSTESİ: " + str_JobTitles + " ### TALİMAT: Yukarıdaki aday özeti ile ilan listesindeki ilanları karşılaştır. 0-100 arasında bir uygunluk skoru üret. Uygunluk skoru 80 ve üzeri olan ilanların SADECE NUMARALARINI aralarına virgül koyarak yaz (Örn: 1, 5, 12). Başka hiçbir açıklama yapma.") + "
+}"]</InArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_headers" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_body" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:String">[str_AiJobTitles]</OutArgument>
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+        <isactr:FieldObject Name="out_code" Type="FieldArgument">
+          <isactr:FieldObject.Value>
+            <OutArgument x:TypeArguments="x:Int32" />
+          </isactr:FieldObject.Value>
+        </isactr:FieldObject>
+      </isactr:ConnectorHttpActivity.FieldObjects>
+    </isactr:ConnectorHttpActivity>
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" Settings="{x:Null}" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="488,174" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_2" JsonObject="[objAiJobTitles]" JsonString="[str_AiJobTitles]" />
+    <Assign sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_12">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[str_AiJobTitles]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[str_JobTitles]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String" xml:space="preserve">[Newtonsoft.Json.Linq.JObject.Parse(obj_AiJobTitles.TextContent).
-    SelectToken("candidates[0].content.parts[0].text").ToString()]</InArgument>
+        <InArgument x:TypeArguments="x:String">[objAiJobTitles("output")(0)("content")(0)("text").ToString.Trim]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Yapay Zekaya göre uygun ilan numaraları : &quot; + str_AiJobTitles]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;Yapay Zekaya göre uygun ilan numaraları : &quot; + str_JobTitles]" />
     <Assign DisplayName="Assign 7" sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_10">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[arr_TargetIndıces]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[str_AiJobTitles.Split({","}, StringSplitOptions.RemoveEmptyEntries).Select(Function(s) s.Trim).ToArray]</InArgument>
+        <InArgument x:TypeArguments="s:String[]">[str_JobTitles.Split({","}, StringSplitOptions.RemoveEmptyEntries).Select(Function(s) s.Trim).ToArray]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:BuildDataTable DataTable="[dt_FilteredJobs]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="488,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xD;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xD;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xD;&#xA;      &lt;xs:complexType&gt;&#xD;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xD;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xD;&#xA;            &lt;xs:complexType&gt;&#xD;&#xA;              &lt;xs:sequence&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ilanBaslik&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xD;&#xA;                  &lt;xs:simpleType&gt;&#xD;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xD;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xD;&#xA;                    &lt;/xs:restriction&gt;&#xD;&#xA;                  &lt;/xs:simpleType&gt;&#xD;&#xA;                &lt;/xs:element&gt;&#xD;&#xA;                &lt;xs:element name=&quot;ilanLink&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xD;&#xA;              &lt;/xs:sequence&gt;&#xD;&#xA;            &lt;/xs:complexType&gt;&#xD;&#xA;          &lt;/xs:element&gt;&#xD;&#xA;        &lt;/xs:choice&gt;&#xD;&#xA;      &lt;/xs:complexType&gt;&#xD;&#xA;    &lt;/xs:element&gt;&#xD;&#xA;  &lt;/xs:schema&gt;&#xD;&#xA;&lt;/NewDataSet&gt;" />
+    <ui:BuildDataTable DataTable="[dt_FilteredJobs]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="488,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;ilanBaslik&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;ilanLink&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
     <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="488,403" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[arr_TargetIndıces]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">

@@ -1,0 +1,13 @@
+﻿{
+  "Name": "2001 yılından bu yana b…",
+  "Type": "Element",
+  "Id": "6y_UnAnzlkyDT5lPAMtPfA",
+  "Reference": "-B4ybalJ2EO1FQAInxGHZg/6y_UnAnzlkyDT5lPAMtPfA",
+  "ParentRef": "-B4ybalJ2EO1FQAInxGHZg/SNGtqcdcU0WCyoi6gRSQNA",
+  "Created": "2026-03-17T10:22:43.5841272Z",
+  "Updated": "2026-03-17T10:22:43.5841272Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=26.1.0.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=25.12.1.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}
