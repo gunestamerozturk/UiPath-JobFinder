@@ -1,39 +1,37 @@
-### Documentation is included in the Documentation folder ###
+# 🤖 AI Destekli Kariyer Danışmanı – UiPath & OpenAI Entegrasyonu
 
+Bu proje, **REFramework** yapısını kullanarak, **OpenAI (ChatGPT 5.4)** desteğiyle **Kariyer.net** üzerindeki yüzlerce iş ilanını kişisel bir özgeçmişle karşılaştıran ve en uygun ilanları raporlayan akıllı bir RPA projesidir.
 
-### REFrameWork Template ###
-**Robotic Enterprise Framework**
+Proje, manuel iş arama sürecindeki zaman kaybını ortadan kaldırmak ve aday-ilan uyumunu yapay zeka analiziyle standardize etmek amacıyla geliştirilmiştir.
 
-* Built on top of *Transactional Business Process* template
-* Uses *State Machine* layout for the phases of automation project
-* Offers high level logging, exception handling and recovery
-* Keeps external settings in *Config.xlsx* file and Orchestrator assets
-* Pulls credentials from Orchestrator assets and *Windows Credential Manager*
-* Gets transaction data from Orchestrator queue and updates back status
-* Takes screenshots in case of system exceptions
+## 🚀 Projenin Amacı ve Çalışma Mantığı
+Bot, kullanıcının müdahalesine gerek kalmadan Kariyer.net üzerinde kapsamlı bir tarama yapar ve sadece gerçekten uygun olan ilanları seçip detaylı analiz eder.
 
+**Süreç şu adımları kapsar:**
+✔ **AI Özetleme:** Kullanıcının CV'sini okuyarak profesyonel bir aday özeti çıkarır.
+✔ **Hızlı Tarama:** Kariyer.net'teki yüzlerce ilan başlığını saniyeler içinde çeker.
+✔ **Akıllı Filtreleme:** AI, ilan başlıklarını aday özetiyle kıyaslayıp potansiyel olanları seçer.
+✔ **Orchestrator Entegrasyonu:** Seçilen ilanlar detaylı analiz için kuyruğa (Queue) eklenir.
+✔ **Detaylı Puanlama:** Her ilanın açıklaması AI tarafından 0-100 arası puanlanır ve nedenleri açıklanır.
+✔ **Raporlama:** %75 ve üzeri uyum sağlayan ilanlar, tüm detaylarıyla kullanıcıya e-posta olarak gönderilir.
 
-### How It Works ###
+## 🧠 Projede Kullanılan Teknolojiler ve Yapılar
+* **REFramework (Robotic Enterprise Framework):** Projenin sağlam bir hata yönetimi ve işlem döngüsü üzerinde çalışması sağlandı.
+* **Orchestrator Queue:** Dispatcher-Performer mantığıyla ilanlar kuyruk yapısında işlendi.
+* **OpenAI API (ChatGPT 5.4):** HTTP Request ve JSON işlemleri ile özgeçmiş analizi ve ilan eşleştirme yapıldı.
+* **Web Automation:** Kariyer.net üzerinde veri kazıma ve navigasyon işlemleri gerçekleştirildi.
+* **JSON Parsing:** AI'dan gelen karmaşık yanıtlar `Newtonsoft.Json` ile işlendi.
 
-1. **INITIALIZE PROCESS**
- + ./Framework/*InitiAllSettings* - Load configuration data from Config.xlsx file and from assets
- + ./Framework/*GetAppCredential* - Retrieve credentials from Orchestrator assets or local Windows Credential Manager
- + ./Framework/*InitiAllApplications* - Open and login to applications used throughout the process
+## 📊 Performans Notları
+* **Kapsam:** Bugün açılan ilk 10 sayfalık ilan listesi.
+* **Hız:** 500'den fazla ilan başlığı sadece **1 dakika 58 saniyede** tarandı.
+* **Verimlilik:** AI 500 ilan arasından 10 potansiyel ilan seçti ve detaylı analiz sonucunda en yüksek uyumlu olanları raporladı.
+* **Zaman Kazancı:** Manuel olarak saatler sürecek "ilan detayı okuma" işlemi saniyeler seviyesine indirildi.
 
-2. **GET TRANSACTION DATA**
- + ./Framework/*GetTransactionData* - Fetches transactions from an Orchestrator queue defined by Config("OrchestratorQueueName") or any other configured data source
-
-3. **PROCESS TRANSACTION**
- + *Process* - Process trasaction and invoke other workflows related to the process being automated 
- + ./Framework/*SetTransactionStatus* - Updates the status of the processed transaction (Orchestrator transactions by default): Success, Business Rule Exception or System Exception
-
-4. **END PROCESS**
- + ./Framework/*CloseAllApplications* - Logs out and closes applications used throughout the process
-
-
-### For New Project ###
-
-1. Check the Config.xlsx file and add/customize any required fields and values
-2. Implement InitiAllApplications.xaml and CloseAllApplicatoins.xaml workflows, linking them in the Config.xlsx fields
-3. Implement GetTransactionData.xaml and SetTransactionStatus.xaml according to the transaction type being used (Orchestrator queues by default)
-4. Implement Process.xaml workflow and invoke other workflows related to the process being automated
+## ▶️ Kurulum ve Çalıştırma
+1. Bu projeyi klonlayın:
+   `git clone https://github.com/gunestamerozturk/JobFinder.git`
+2. **UiPath Studio** ile projeyi açın.
+3. **Orchestrator** üzerinde gerekli Assetleri (OpenAIApiKey, ToMail vb.) ve Kuyruğu (Queue) oluşturun.
+4. **Önemli:** Kariyer.net'in robot korumasını aşmak için varsayılan tarayıcınızda oturumun açık olduğundan (Beni Hatırla) emin olun.
+5. Botu çalıştırarak süreci başlatabilirsiniz.
