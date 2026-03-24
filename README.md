@@ -8,12 +8,12 @@ Proje, manuel iş arama sürecindeki zaman kaybını ortadan kaldırmak ve aday-
 Bot, kullanıcının müdahalesine gerek kalmadan Kariyer.net üzerinde kapsamlı bir tarama yapar ve sadece gerçekten uygun olan ilanları seçip detaylı analiz eder.
 
 **Süreç şu adımları kapsar:**
-✔ **AI Özetleme:** Kullanıcının CV'sini okuyarak profesyonel bir aday özeti çıkarır.
-✔ **Hızlı Tarama:** Kariyer.net'teki yüzlerce ilan başlığını saniyeler içinde çeker.
-✔ **Akıllı Filtreleme:** AI, ilan başlıklarını aday özetiyle kıyaslayıp potansiyel olanları seçer.
-✔ **Orchestrator Entegrasyonu:** Seçilen ilanlar detaylı analiz için kuyruğa (Queue) eklenir.
-✔ **Detaylı Puanlama:** Her ilanın açıklaması AI tarafından 0-100 arası puanlanır ve nedenleri açıklanır.
-✔ **Raporlama:** %75 ve üzeri uyum sağlayan ilanlar, tüm detaylarıyla kullanıcıya e-posta olarak gönderilir.
+✅ **AI Özetleme:** Kullanıcının CV metnini okuyarak profesyonel bir aday özeti çıkarır.
+✅ **Hızlı Tarama:** Kariyer.net'teki yüzlerce ilan başlığını (testte 500+) saniyeler içinde kazır.
+✅ **Akıllı Filtreleme:** AI, ilan başlıklarını aday özetiyle kıyaslayıp potansiyel olanları seçer.
+✅ **Orchestrator Entegrasyonu:** Seçilen ilanlar detaylı analiz için Kuyruğa (Queue) eklenir.
+✅ **Detaylı Puanlama:** Her ilanın açıklaması AI tarafından 0-100 arası puanlanır ve nedenleri açıklanır.
+✅ **Raporlama:** %75 ve üzeri uyum sağlayan ilanlar, tüm detaylarıyla e-posta olarak gönderilir.
 
 ## 🧠 Projede Kullanılan Teknolojiler ve Yapılar
 * **REFramework (Robotic Enterprise Framework):** Projenin sağlam bir hata yönetimi ve işlem döngüsü üzerinde çalışması sağlandı.
